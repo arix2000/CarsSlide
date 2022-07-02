@@ -46,17 +46,18 @@ public class CarController : MonoBehaviour
     {
         grounded = false;
         RaycastHit hit;
-        if(Physics.Raycast(groundRayPoint.position, -transform.up, out hit, graundRayLenght, whatIsRoad)) 
+
+        if(Physics.Raycast(groundRayPoint.position, -transform.up, out hit, graundRayLenght, whatIsTerrain)) 
         {
-            speedInput = Input.GetAxis("Vertical") * forwardAccel * speed;
+            speedInput = Input.GetAxis("Vertical") * forwardAccel * speed / 2.2f;
             grounded = true;
             transform.rotation = Quaternion.RotateTowards(
                 transform.rotation, Quaternion.FromToRotation(transform.up, hit.normal) * transform.rotation, smooth * Time.deltaTime);
         }
 
-        if(Physics.Raycast(groundRayPoint.position, -transform.up, out hit, graundRayLenght, whatIsTerrain)) 
+        if(Physics.Raycast(groundRayPoint.position, -transform.up, out hit, graundRayLenght, whatIsRoad)) 
         {
-            speedInput = Input.GetAxis("Vertical") * forwardAccel * speed / 2.2f;
+            speedInput = Input.GetAxis("Vertical") * forwardAccel * speed;
             grounded = true;
             transform.rotation = Quaternion.RotateTowards(
                 transform.rotation, Quaternion.FromToRotation(transform.up, hit.normal) * transform.rotation, smooth * Time.deltaTime);
